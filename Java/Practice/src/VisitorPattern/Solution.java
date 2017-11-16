@@ -82,7 +82,7 @@ class SumInLeavesVisitor extends TreeVis {
     }
 
     public void visitNode(TreeNode node) {
-      	//implement this
+      	//No debe hacer nada si lo recibe un nodo
     }
 
     public void visitLeaf(TreeLeaf leaf) {
@@ -96,7 +96,6 @@ class ProductOfRedNodesVisitor extends TreeVis {
     private final int M = 1000000007;
     
     public int getResult() {
-      	//implement this
         return result;
     }
 
@@ -142,6 +141,10 @@ public class Solution {
   
     public static Tree solve() {
         //read the tree from STDIN and return its root as a return value of this function
+    	//debe construir un arbol como un nodo que en su ArrayList de hijos tenga los hijos directos
+    	//si en estos hijos hay algun otro nodo, este tendra en su interior sus hijos correspondientes, El nodo inicial por lo tanto
+    	//no tendra todo el arbol completo en su hijos, solo los directos.
+    	//Una vez creado esta estructura de nodo con sus hijos en el array list el metodo debe devolver el nodo inicial
         return ;
         
     }   
