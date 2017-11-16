@@ -140,11 +140,20 @@ class FancyVisitor extends TreeVis {
 public class Solution {
   
     public static Tree solve() {
-        //read the tree from STDIN and return its root as a return value of this function
-    	//debe construir un arbol como un nodo que en su ArrayList de hijos tenga los hijos directos
-    	//si en estos hijos hay algun otro nodo, este tendra en su interior sus hijos correspondientes, El nodo inicial por lo tanto
-    	//no tendra todo el arbol completo en su hijos, solo los directos.
-    	//Una vez creado esta estructura de nodo con sus hijos en el array list el metodo debe devolver el nodo inicial
+    	
+    	/*INPUT FORMAT
+    	 *The first line contains a single integer, n , denoting the number of nodes in the tree. The second line contains n space-separated integers describing the respective values of x1,x2,x3...xn. 
+    	 *The third line contains n space-separated binary integers describing the respective values of c1,c2,c3,...cn. Each ci denotes the color of the ith node, where  denotes red and  denotes green. 
+    	 *Each of the  subsequent lines contains two space-separated integers,  and , describing an edge between nodes  and . 
+    	 */
+    	
+    	/*
+    	 * read the tree from STDIN and return its root as a return value of this function debe construir un arbol como un nodo que en su ArrayList de hijos tenga los hijos directos
+    	 *si en estos hijos hay algun otro nodo, este tendra en su interior sus hijos correspondientes, El nodo inicial por lo tanto 
+    	 *no tendra todo el arbol completo en su hijos, solo los directos. 
+    	 * Una vez creado esta estructura de nodo con sus hijos en el array list el metodo debe devolver el nodo inicial.
+    	 */
+
         return ;
         
     }   
