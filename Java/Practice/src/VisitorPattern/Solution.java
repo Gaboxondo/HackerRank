@@ -1,6 +1,7 @@
 package VisitorPattern;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 enum Color {
     RED, GREEN
@@ -29,7 +30,7 @@ abstract class Tree {
     public int getDepth() {
         return depth;
     }
-
+    
     public abstract void accept(TreeVis visitor);
 }
 
@@ -137,24 +138,97 @@ class FancyVisitor extends TreeVis {
     }
 }
 
+class Conection{
+	
+	private int conectorNode1;
+	private int conectorNode2;
+	
+	public Conection(int a, int b) {
+		setConector1(a);
+		setConector2(b);
+		
+	}
+	
+	public void setConector1(int i) {
+		conectorNode1 = i;
+	}
+	public void setConector2(int j) {
+		conectorNode2 = j;
+	}
+	
+	public int getConector1() {
+		return conectorNode1;
+	}
+	
+	public int getConector2() {
+		return conectorNode2;
+	}
+}
 public class Solution {
   
     public static Tree solve() {
     	
-    	/*INPUT FORMAT
-    	 *The first line contains a single integer, n , denoting the number of nodes in the tree. The second line contains n space-separated integers describing the respective values of x1,x2,x3...xn. 
-    	 *The third line contains n space-separated binary integers describing the respective values of c1,c2,c3,...cn. Each ci denotes the color of the ith node, where  denotes red and  denotes green. 
-    	 *Each of the  subsequent lines contains two space-separated integers,  and , describing an edge between nodes  and . 
-    	 */
+    	Scanner reader = new Scanner(System.in);
     	
-    	/*
-    	 * read the tree from STDIN and return its root as a return value of this function debe construir un arbol como un nodo que en su ArrayList de hijos tenga los hijos directos
-    	 *si en estos hijos hay algun otro nodo, este tendra en su interior sus hijos correspondientes, El nodo inicial por lo tanto 
-    	 *no tendra todo el arbol completo en su hijos, solo los directos. 
-    	 * Una vez creado esta estructura de nodo con sus hijos en el array list el metodo debe devolver el nodo inicial.
-    	 */
+    	int n = reader.nextInt();
+    	int[] dephts = new int[n];
+    	Color[] EnumColors = new Color[n];
+    	Conection[] conexions = new Conection[n-1];
+    	for(int i = 0; i<n-1;i++) {
+    		conexions[i] = new Conection(0,0);
+    	}
+    	
+    	Tree[] nodes = new Tree[n];
+    	
+    	
+    	for (int i = 0; i<n; i++) {
+    		dephts[i] = reader.nextInt();
+    	}
+    	//reader.nextLine();
+    	for (int i = 0; i<n; i++) {
+    		int value = reader.nextInt();
+    		if(value == 0) {
+    			EnumColors[i] = Color.RED;
+    		}
+    		else {
+    			EnumColors[i] = Color.GREEN;
+    		}
+    		
+    	}
+    	//reader.nextLine();
+    	
+    	for(int i = 0;i<(n-1);i++) {
+			conexions[i].setConector1(reader.nextInt());
+    		conexions[i].setConector2(reader.nextInt());
+    	}
+    	
+    	for(int i = 0; i<n;i++) {
+    		
+    		boolean isLeaf = true;
+    		
+    		for(int j = 0; j<n-1;j++) {
+    			int conextionNumber = conexions[j].getConector1();
+    			if(conextionNumber == i) {
+    				isLeaf = false;
+    			}
+    		}
+    		if(isLeaf) {
+    			nodes[i] = new TreeLeaf(i,EnumColors[i], dephts[i]);
+    			System.out.println("\t\tCreated a treeNode in nodes[" + i + "]");
+    		}
+    		else {
+    			nodes[i] = new TreeNode(i,EnumColors[i], dephts[i]);
+    			System.out.println("\t\tCreated a treeLeaf in nodes[" + i + "]");
+    		}
+    	}
+    	
+    	for(int i = 0; i <n-1 ; i++) {
+    		
+    		((TreeNode)nodes[(conexions[i].getConector1())-1]).addChild(nodes[(conexions[i].getConector2())-1]);
+    		
+    	}
 
-        return ;
+        return nodes[0];
         
     }   
     
