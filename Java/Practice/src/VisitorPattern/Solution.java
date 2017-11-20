@@ -102,13 +102,13 @@ class ProductOfRedNodesVisitor extends TreeVis {
 
     public void visitNode(TreeNode node) {
       	if(node.getColor().equals(Color.RED)){
-            result = (result*node.getValue()) % M;
+            result = (result*node.getValue());
         }
     }
 
     public void visitLeaf(TreeLeaf leaf) {
       	if(leaf.getColor().equals(Color.RED)){
-            result = (result*leaf.getValue()) % M;
+            result = (result*leaf.getValue());
         }
     }
 }
@@ -120,13 +120,13 @@ class FancyVisitor extends TreeVis {
     
     public int getResult() {
     	
-      	//implement this
+      	int result = Math.abs(resultFirstParameter - resultSecondParameter);
     	
-        return 0;
+        return result;
     }
 
     public void visitNode(TreeNode node) {
-    	if((node.getDepth()%2) == 0 || node.getDepth() == 0){
+    	if((node.getDepth()%2) == 0 || node.getDepth() == 1){
             resultFirstParameter += node.getValue();
         }
     }
@@ -171,7 +171,7 @@ public class Solution {
     	Scanner reader = new Scanner(System.in);
     	
     	int n = reader.nextInt();
-    	int[] dephts = new int[n];
+    	int[] values = new int[n];
     	Color[] EnumColors = new Color[n];
     	Conection[] conexions = new Conection[n-1];
     	for(int i = 0; i<n-1;i++) {
@@ -182,7 +182,7 @@ public class Solution {
     	
     	
     	for (int i = 0; i<n; i++) {
-    		dephts[i] = reader.nextInt();
+    		values[i] = reader.nextInt();
     	}
     	//reader.nextLine();
     	for (int i = 0; i<n; i++) {
@@ -200,6 +200,7 @@ public class Solution {
     	for(int i = 0;i<(n-1);i++) {
 			conexions[i].setConector1(reader.nextInt());
     		conexions[i].setConector2(reader.nextInt());
+    		//System.out.println("conextion catched Nº: " + i + " and n-1 = " + (n-1));
     	}
     	
     	for(int i = 0; i<n;i++) {
@@ -208,17 +209,18 @@ public class Solution {
     		
     		for(int j = 0; j<n-1;j++) {
     			int conextionNumber = conexions[j].getConector1();
-    			if(conextionNumber == i) {
+    			if((conextionNumber-1) == i) {
     				isLeaf = false;
+    				break;
     			}
     		}
     		if(isLeaf) {
-    			nodes[i] = new TreeLeaf(i,EnumColors[i], dephts[i]);
-    			System.out.println("\t\tCreated a treeNode in nodes[" + i + "]");
+    			nodes[i] = new TreeLeaf(values[i],EnumColors[i], i+1);
+    			//System.out.println("\t\tCreated a treeleaf in nodes[" + i + "]");
     		}
     		else {
-    			nodes[i] = new TreeNode(i,EnumColors[i], dephts[i]);
-    			System.out.println("\t\tCreated a treeLeaf in nodes[" + i + "]");
+    			nodes[i] = new TreeNode(values[i],EnumColors[i], i+1);
+    			//System.out.println("\t\tCreated a treeNode in nodes[" + i + "]");
     		}
     	}
     	
